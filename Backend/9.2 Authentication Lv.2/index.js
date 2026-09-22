@@ -70,7 +70,7 @@ app.post("/login", async (req, res) => {
     const dbResult = await db.query("SELECT * FROM users WHERE email = $1", [
       email,
     ]);
-    
+
     if (dbResult.rows.length > 0) {
       const user = dbResult.rows[0];
       const storedHashedPassword = user.password; // Double check this column name!
@@ -79,8 +79,8 @@ app.post("/login", async (req, res) => {
         if (err) {
           console.log("Error comparing passwords:", err);
           return res.status(500).send("Server error");
-        } 
-        
+        }
+
         if (match) {
           res.render("secrets.ejs");
         } else {
